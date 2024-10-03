@@ -1,13 +1,14 @@
 package com.example.sistemauniversidad.service;
 
-import org.springframework.stereotype.Service;
 import com.example.sistemauniversidad.model.Promedio;
 import com.example.sistemauniversidad.model.Student;
 import com.example.sistemauniversidad.repository.PromedioRepository;
 import com.example.sistemauniversidad.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PromedioService {
@@ -21,48 +22,35 @@ public class PromedioService {
         this.studentRepository = studentRepository;
     }
 
-
-
     public List<Promedio> getAllPromedios() {
         return promedioRepository.findAll();
     }
 
-    public Promedio getPromedioById(Long id) {
-        return promedioRepository.findById(id).orElse(null);
+    public Optional<Promedio> getPromedioById(Long id) {
+        return promedioRepository.findById(id);
     }
 
     public Promedio addPromedio(Promedio promedio) {
-        // Buscamos el estudiante por su id
-        Student student = studentRepository.findById(promedio.getStudent().getId().intValue()).orElseThrow();
-       if (student != null) {
-
-           return promedioRepository.save(promedio);
-       }
-        return null;
+        Student student = studentRepository.findById(promedio.getStudent().getId())
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+        promedio.setStudent(student);
+        return promedioRepository.save(promedio);
     }
 
     public Promedio updatePromedio(Long promedioId, Promedio promedioDetails) {
-        Promedio promedio = promedioRepository.findById(promedioId).orElse(null);
-        Student student = studentRepository.findById(promedioDetails.getStudent().getId().intValue()).orElseThrow();
+        Promedio promedio = promedioRepository.findById(promedioId)
+                .orElseThrow(() -> new RuntimeException("Promedio not found"));
+        Student student = studentRepository.findById(promedioDetails.getStudent().getId())
+                .orElseThrow(() -> new RuntimeException("Student not found"));
 
-        if (promedio != null && student != null) {
-            promedio.setPromedio(promedioDetails.getPromedio());
-            promedio.setStudent(student);
-            return promedioRepository.save(promedio);
-        }
-        return null;
+        promedio.setPromedio(promedioDetails.getPromedio());
+        promedio.setStudent(student);
+        return promedioRepository.save(promedio);
     }
 
     public void deletePromedio(Long promedioId) {
-        Promedio promedio = promedioRepository.findById(promedioId).orElse(null);
-        if (promedio != null){
-            promedioRepository.delete(promedio);
-        }else {
-            return;
-        }
-
-
-
+        Promedio promedio = promedioRepository.findById(promedioId)
+                .orElseThrow(() -> new RuntimeException("Promedio not found"));
+        promedioRepository.delete(promedio);
     }
-
 }

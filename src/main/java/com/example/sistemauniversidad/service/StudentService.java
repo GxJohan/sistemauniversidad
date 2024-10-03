@@ -18,7 +18,7 @@ public class StudentService {
     }
 
     //Metodo para obtener un estudiante por su id
-    public Student getStudentById(int id) {
+    public Student getStudentById(Long id) {
         return
                 studentRepository.findById(id).orElse(null);
     }
@@ -29,7 +29,7 @@ public class StudentService {
     }
 
     //Metodo para edutar un estudiante
-    public Student updateStudent(int id, Student student) {
+    public Student updateStudent(Long id, Student student) {
         Student student1 = studentRepository.findById(id).orElse(null);
 
         if (student1 != null) {
@@ -42,7 +42,7 @@ public class StudentService {
     }
 
     //Metedo eliminar un estudiante
-    public void deleteStudent(int id) {
+    public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
 

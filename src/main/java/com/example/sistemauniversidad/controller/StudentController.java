@@ -25,7 +25,7 @@ public class StudentController {
 
     //obtener un estudiante por su id - http
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable int id) {
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         Student student = studentService.getStudentById(id);
         if (student != null) {
             return ResponseEntity.ok(student);
@@ -42,7 +42,7 @@ public class StudentController {
 
     //Actualizamos a un estudiante por su ID - http
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         Student updatedStudent = studentService.updateStudent(id, student);
         if (updatedStudent != null) {
             return ResponseEntity.ok(updatedStudent);
@@ -52,7 +52,7 @@ public class StudentController {
 
     //Eliminar un estudiante
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable int id) {
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
