@@ -2,16 +2,19 @@ package com.example.sistemauniversidad.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
+@Table(name = "estudiante")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Column(name = "nombre")
     private String name;
 
+    @Column(name = "correo")
     private String email;
 
     public Long getId() {

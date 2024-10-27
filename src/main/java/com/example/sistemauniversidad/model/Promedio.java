@@ -11,6 +11,7 @@ public class Promedio {
 
     private double promedio;
 
+    //Foreign key
     @ManyToOne
     private Student student;
 
