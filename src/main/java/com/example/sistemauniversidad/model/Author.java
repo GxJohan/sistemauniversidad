@@ -19,6 +19,7 @@ public class Author {
 
     @NotNull(message = "El nombre del autor es requerido")//Valida que el campo no sea nulo
     @Size(min = 3, max = 50, message = "    El nombre del autor debe tener entre 3 y 50 caracteres")//Valida que el campo tenga una longitud entre 3 y 50 caracteres
+    @Column(name = "name")//Define el nombre de la columna en la tabla
     private String name;
 
     @NotNull(message = "El correo del autor es requerido")//Valida que el campo no sea nulo
