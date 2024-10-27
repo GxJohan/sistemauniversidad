@@ -27,7 +27,27 @@ public class Author {
     @Pattern(regexp = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "El correo del autor no es válido")//Valida que el campo cumpla con una expresión regular
     private String email;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public @NotNull(message = "El nombre del autor es requerido") @Size(min = 3, max = 50, message = "    El nombre del autor debe tener entre 3 y 50 caracteres") String getName() {
+        return name;
+    }
 
+    public void setName(@NotNull(message = "El nombre del autor es requerido") @Size(min = 3, max = 50, message = "    El nombre del autor debe tener entre 3 y 50 caracteres") String name) {
+        this.name = name;
+    }
+
+    public @NotNull(message = "El correo del autor es requerido") @Pattern(regexp = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "El correo del autor no es válido") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotNull(message = "El correo del autor es requerido") @Pattern(regexp = "^[a-zA-Z0-9_.%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "El correo del autor no es válido") String email) {
+        this.email = email;
+    }
 }
